@@ -56,13 +56,22 @@ Explain the model in simple terms:
 
 - a repository can have multiple modes
 - each mode defines context files and optional external contexts
+- the single source of truth is the mode definition itself
+  - for local modes, that source is `.mega/modes/...`
+  - for remote modes, that source is the synced mode repository
 - a mode can represent an operating pattern, not just a job label
 - for example, one mode can enforce a debugging-oriented setup with investigation rules and subagent operating guidance
 - another mode can enforce a simple `obra/superpowers` workflow
 - another mode can enforce a more structured `awslabs/aidlc-workflows` workflow
 - `megaman` applies whichever mode is selected for the current task
 - that selection can come from the user directly or from a task manager that is coordinating the workflow
-- `megaman` removes files managed by the previous mode and then materializes the selected mode
+- `megaman` does not treat the currently projected local files as the source of truth
+- during both `apply` and `sync`, it removes files from the previous applied snapshot and then materializes the mode again from the original source of truth
+- this is true even when reapplying the same mode
+- if a local mode changes under `.mega`, `megaman sync local` or `megaman sync` can reapply the active mode from the updated local source
+- if a remote mode repository changes, `megaman sync` or `megaman sync <repository-name>` can refresh the remote source and then reapply the active mode
+- if the source changes, the projected files in the repository are rebuilt from the source of truth rather than edited in place
+- if the active mode no longer exists in the source after sync, `megaman` can fall back to `default`
 - the expectation is that one mode should strongly shape the agent toward one intended way of working
 - `default` is the built-in baseline mode with no managed files
 
@@ -96,18 +105,36 @@ megaman mode diff <mode-id>
 megaman mode apply <mode-id>
 ```
 
+Explain that `apply` removes the previously applied snapshot and then rebuilds the selected mode from its original source of truth.
+
 5. Check the active mode:
 
 ```bash
 megaman mode current
 ```
 
-6. Manage remote mode repositories when needed:
+6. Re-sync the current source of truth when needed:
+
+```bash
+megaman sync
+megaman sync local
+megaman sync <repository-name>
+```
+
+Explain that `sync` re-materializes the active mode from its original source of truth. For local modes that means `.mega`, and for remote modes that means the synced repository cache.
+When users ask what happens after a mode definition is updated, explain it like this:
+
+- local `.mega` changes are reflected by re-syncing and reapplying from `.mega`
+- remote repository changes are reflected by syncing the repository and then reapplying from the refreshed cache
+- the currently projected files are not the canonical copy
+- `megaman` removes the previous applied snapshot and rebuilds the context from the source of truth
+
+7. Manage remote mode repositories when needed:
 
 ```bash
 megaman repo list
-megaman repo sync
-megaman repo sync <repository-name>
+megaman repo add <repository-name> <url>
+megaman repo remove <repository-name>
 ```
 
 ## How To Explain Creating Modes
@@ -137,7 +164,7 @@ Example structure:
 - put mode directories in that repository root
 - each mode directory should contain a `mode.yaml`
 - register that repository with `megaman repo add <repository-name> <url>`
-- sync it with `megaman repo sync` or `megaman repo sync <repository-name>`
+- sync it with `megaman sync` or `megaman sync <repository-name>`
 
 Explain the difference like this:
 
@@ -152,6 +179,7 @@ When onboarding users:
 - start with what `megaman` is and why it exists
 - connect each CLI command to the problem it solves
 - explain the sequence `init -> mode list -> show/validate/diff -> apply`
+- explain that `apply` and `sync` both rebuild from the original source of truth instead of treating projected files as canonical
 - distinguish clearly between local modes, remote mode repositories, and built-in `default`
 - explain that a mode can enforce a workflow, rules, skills, and subagent operating guidance for one current task
 - explain that the mode can be switched directly by the user or by a task manager coordinating the work
@@ -203,6 +231,7 @@ Use this pattern:
 - `5. CLI usage`
 - `6. How to create local modes`
 - `7. How to use remote mode repositories`
+- `8. What happens when remote or .mega context is updated`
 
 Adapt the wording to the user's language, but keep the choices explicit and easy to answer with a number.
 
