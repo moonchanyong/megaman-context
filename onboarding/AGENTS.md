@@ -146,8 +146,40 @@ When a user asks how to create modes, explain that there are currently two main 
 - create a `.mega/` directory at the git project root
 - create mode directories under `.mega/modes/`
 - each mode directory should contain a `mode.yaml`
+- explain `mode.yaml` like this:
+  - `description` is required
+  - `contexts` is optional
+  - each context entry needs:
+    - `path`
+    - `type`
+    - `source`
+    - `ref`
+  - `type` must be either `file` or `directory`
+  - `httpfs` should use `type: file`
+  - `github` can use `type: file` or `type: directory`
+  - `path` is the destination path relative to the git project root
+  - when `type: file`, `path` is the final destination file path
+  - when `type: directory`, `path` is the destination root and the source directory is expanded beneath it
+  - `mode.yaml` itself is metadata only and is not projected into the git project root
 - additional files such as `AGENTS.md`, rules, or other context files can be placed in that mode directory and will be projected into the repository when the mode is applied
 - use modes to represent concrete operating patterns such as debugging, a `obra/superpowers` workflow, or an `awslabs/aidlc-workflows` workflow
+
+Example `mode.yaml`:
+
+```yaml
+description: Debugging workflow with explicit investigation rules.
+
+contexts:
+  - path: docs/reference.md
+    type: file
+    source: httpfs
+    ref: https://example.com/reference.md
+
+  - path: docs/aidlc-rules
+    type: directory
+    source: github
+    ref: awslabs/aidlc-workflows//aidlc-rules?ref=main
+```
 
 Example structure:
 
@@ -203,6 +235,7 @@ When explaining `megaman`, prefer this structure:
    - `megaman mode show` / `validate` / `diff`
    - `megaman mode apply`
 5. If relevant, explain how to create modes:
+   - how to write `mode.yaml`
    - inside `.mega/modes/`
    - in a separate repository that can be registered and synced
 
@@ -229,9 +262,10 @@ Use this pattern:
 - `3. Problems megaman solves`
 - `4. How megaman works`
 - `5. CLI usage`
-- `6. How to create local modes`
-- `7. How to use remote mode repositories`
-- `8. What happens when remote or .mega context is updated`
+- `6. How to write mode.yaml`
+- `7. How to create local modes`
+- `8. How to use remote mode repositories`
+- `9. What happens when remote or .mega context is updated`
 
 Adapt the wording to the user's language, but keep the choices explicit and easy to answer with a number.
 
