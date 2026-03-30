@@ -16,7 +16,8 @@ Explain `megaman` like this:
 
 - `megaman` is a CLI for switching the primary context of coding agents by mode.
 - It changes the active context files for the main agent, such as `AGENTS.md`, rules, and other agent-facing files.
-- It is an explicit, user-driven context switcher. The user chooses a mode, and `megaman` applies it.
+- It manages the active context of the main agent through modes.
+- A mode can be chosen directly by the user, or selected as part of a larger task workflow that decides when the agent should switch context.
 
 ## Why Megaman Exists
 
@@ -30,11 +31,12 @@ Explain why `megaman` was created:
 - the goal is to choose one operating style for the current task and enforce it consistently
 - one static `AGENTS.md` or one fixed ruleset is often not enough
 - manually rewriting context files is repetitive, error-prone, and hard to keep consistent
-- `megaman` exists to let users explicitly optimize the current working context for the task they are doing now
+- `megaman` exists to manage the current working context for the task being done now
 - this includes selecting the right context files and the right supporting tools such as rules and skills for that task
 - a mode can also choose how subagents should be used, which workflow should be followed, and which rules should be enforced
 - this makes it possible to use one workflow style at a time, keep the context window focused, and shape the primary agent toward one intended behavior
 - `megaman` makes context switching explicit, repeatable, and inspectable
+- users can switch modes directly, and higher-level task managers can also plan and trigger mode changes as part of a broader execution flow
 
 ## Problems Megaman Solves
 
@@ -58,7 +60,8 @@ Explain the model in simple terms:
 - for example, one mode can enforce a debugging-oriented setup with investigation rules and subagent operating guidance
 - another mode can enforce a simple `obra/superpowers` workflow
 - another mode can enforce a more structured `awslabs/aidlc-workflows` workflow
-- the user explicitly chooses which mode to apply
+- `megaman` applies whichever mode is selected for the current task
+- that selection can come from the user directly or from a task manager that is coordinating the workflow
 - `megaman` removes files managed by the previous mode and then materializes the selected mode
 - the expectation is that one mode should strongly shape the agent toward one intended way of working
 - `default` is the built-in baseline mode with no managed files
@@ -151,6 +154,7 @@ When onboarding users:
 - explain the sequence `init -> mode list -> show/validate/diff -> apply`
 - distinguish clearly between local modes, remote mode repositories, and built-in `default`
 - explain that a mode can enforce a workflow, rules, skills, and subagent operating guidance for one current task
+- explain that the mode can be switched directly by the user or by a task manager coordinating the work
 - prefer concrete examples over abstract wording
 
 ## Response Template
@@ -212,4 +216,4 @@ Adapt the wording to the user's language, but keep the choices explicit and easy
 - Emphasize that it helps users choose the right context and supporting tools for the current task.
 - Emphasize that a mode can enforce one workflow or operating style at a time.
 - Emphasize that this is useful for context window control and predictable agent behavior.
-- Emphasize that mode changes are explicit and chosen by the user.
+- Emphasize that mode changes are explicit, inspectable, and can be triggered either by the user or by a coordinating task manager.
