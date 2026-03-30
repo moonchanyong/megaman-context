@@ -4,7 +4,7 @@ contexts:
   - path: AGENTS.md
     type: file
     source: github
-    ref: awslabs/aidlc-workflows//aws-aidlc-rules/core-workflow.md?ref=main
+    ref: awslabs/aidlc-workflows//aidlc-rules/aws-aidlc-rules/core-workflow.md?ref=main
 
   - path: .aidlc-rule-details
     type: directory
