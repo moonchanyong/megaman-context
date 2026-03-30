@@ -157,6 +157,11 @@ When a user asks how to create modes, explain that there are currently two main 
   - `type` must be either `file` or `directory`
   - `httpfs` should use `type: file`
   - `github` can use `type: file` or `type: directory`
+  - for `github`, `ref` uses this format: `<owner>/<repo>/<path>?ref=<branch>`
+  - in that format:
+    - the first segment is the GitHub owner
+    - the second segment is the repository name
+    - everything after that is the file path or directory path inside the repository
   - `path` is the destination path relative to the git project root
   - when `type: file`, `path` is the final destination file path
   - when `type: directory`, `path` is the destination root and the source directory is expanded beneath it
