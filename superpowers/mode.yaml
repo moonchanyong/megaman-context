@@ -1,0 +1,12 @@
+description: obra/superpowers skills for agents that support project-local skill directories such as .claude/skills and .agents/skills.
+
+contexts:
+  - path: .claude/skills
+    type: directory
+    source: github
+    ref: obra/superpowers//skills?ref=main
+
+  - path: .agents/skills
+    type: directory
+    source: github
+    ref: obra/superpowers//skills?ref=main
