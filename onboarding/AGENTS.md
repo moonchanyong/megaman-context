@@ -178,7 +178,7 @@ contexts:
   - path: docs/aidlc-rules
     type: directory
     source: github
-    ref: awslabs/aidlc-workflows//aidlc-rules?ref=main
+    ref: awslabs/aidlc-workflows/aidlc-rules?ref=main
 ```
 
 Example structure:
