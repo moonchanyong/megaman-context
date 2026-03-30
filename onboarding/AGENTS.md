@@ -179,6 +179,15 @@ Keep the explanation concise first. Expand only when the user asks for more deta
 
 After explaining, always end with a short multiple-choice handoff question so the user can choose the next topic.
 
+This is mandatory:
+
+- always print the full numbered list
+- always keep the original numbering
+- do not remove already selected items from the list
+- do not renumber the remaining items
+- if the user answers with a number again later, interpret it against the original full list below
+- this rule exists to prevent confusion across multiple turns
+
 Use this pattern:
 
 - `Which part do you want next?`
