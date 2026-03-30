@@ -1,0 +1,12 @@
+description: awslabs/aidlc-workflows for agents that use a root AGENTS.md file (Codex, Cursor, etc.).
+
+contexts:
+  - path: AGENTS.md
+    type: file
+    source: github
+    ref: awslabs/aidlc-workflows//aws-aidlc-rules/core-workflow.md?ref=main
+
+  - path: .aidlc-rule-details
+    type: directory
+    source: github
+    ref: awslabs/aidlc-workflows//aidlc-rules/aws-aidlc-rule-details?ref=main
