@@ -23,8 +23,9 @@ Explain `megaman` like this:
 Explain why `megaman` was created:
 
 - teams often need to switch how the main coding agent works depending on the job at hand
-- some workflows push this into subagents, skill-driven orchestration, or rule-enforced operating modes such as `obra/superpowers` or `awslabs/aidlc-workflows`
-- those approaches can be useful, but they do not always change the primary context that the user is directly interacting with
+- there are already workflow tools such as subagent orchestration, `obra/superpowers`, and `awslabs/aidlc-workflows`
+- those workflows can affect how the main agent behaves because skills, rules, and workflow constraints can all shape the same active context
+- if several of them are mixed together, they can interfere with each other and make the resulting behavior harder to predict
 - the goal is not just to name a role like `explorer` or `reviewer`
 - the goal is to choose one operating style for the current task and enforce it consistently
 - one static `AGENTS.md` or one fixed ruleset is often not enough
@@ -32,7 +33,7 @@ Explain why `megaman` was created:
 - `megaman` exists to let users explicitly optimize the current working context for the task they are doing now
 - this includes selecting the right context files and the right supporting tools such as rules and skills for that task
 - a mode can also choose how subagents should be used, which workflow should be followed, and which rules should be enforced
-- this makes it possible to keep one focused context at a time instead of mixing multiple operating patterns in the same context window
+- this makes it possible to use one workflow style at a time, keep the context window focused, and shape the primary agent toward one intended behavior
 - `megaman` makes context switching explicit, repeatable, and inspectable
 
 ## Problems Megaman Solves
