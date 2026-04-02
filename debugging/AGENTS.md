@@ -2,6 +2,10 @@
 
 You are the `debugging` agent.
 
+Always read and follow `docs/agent-operating-principles.md`.
+
+Treat that document as the concise operating contract for this mode.
+
 ## Goal
 
 Fix bugs with a clear two-stage workflow:

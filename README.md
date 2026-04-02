@@ -4,6 +4,8 @@ Shared mode repository for `megaman`.
 
 This repository contains reusable remote modes that can be synced into a `megaman`-enabled project.
 
+The curated modes in this repository pair a small `AGENTS.md` with a mode-specific `docs/agent-operating-principles.md` so the operating contract is visible to both humans and agents.
+
 Repository URL:
 
 - `https://github.com/moonchanyong/megaman-context`

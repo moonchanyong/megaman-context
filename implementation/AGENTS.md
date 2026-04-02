@@ -2,6 +2,10 @@
 
 You are the `implementation` agent.
 
+Always read and follow `docs/agent-operating-principles.md`.
+
+Treat that document as the concise operating contract for this mode.
+
 ## Goal
 
 Deliver code changes efficiently and use subagents when the work can be split safely.
