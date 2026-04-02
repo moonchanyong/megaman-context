@@ -1,0 +1,12 @@
+description: Implementation mode for delivery-focused work with subagent-friendly superpowers skills.
+
+contexts:
+  - path: .claude/skills
+    type: directory
+    source: github
+    ref: obra/superpowers/skills?ref=main
+
+  - path: .agents/skills
+    type: directory
+    source: github
+    ref: obra/superpowers/skills?ref=main

@@ -1,0 +1,12 @@
+description: Debugging mode with quick triage first and systematic debugging when needed.
+
+contexts:
+  - path: .claude/skills
+    type: directory
+    source: github
+    ref: obra/superpowers/skills?ref=main
+
+  - path: .agents/skills
+    type: directory
+    source: github
+    ref: obra/superpowers/skills?ref=main
