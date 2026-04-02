@@ -6,7 +6,7 @@ This repository contains reusable remote modes that can be synced into a `megama
 
 Current example modes:
 
-- `onboarding`
+- `megaman-onboarding`
 - `aidlc-workflows`
 - `superpowers`
 
@@ -15,5 +15,5 @@ Typical usage from a project that already ran `megaman init`:
 ```bash
 megaman sync megaman-context
 megaman mode list
-megaman mode apply megaman-context/onboarding
+megaman mode apply megaman-context/megaman-onboarding
 ```
